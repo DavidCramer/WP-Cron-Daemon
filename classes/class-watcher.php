@@ -112,8 +112,10 @@ class Watcher {
         if ( $id && $id === self::get_active_id() ) {
             // Set the exit method to ensure that the watch continues.
             register_shutdown_function( array( 'Cron_Daemon\\Watcher', 'run' ) );
-            sleep( 10 );
+            // Spawn the cron.
             spawn_cron();
+            // Wait for 10 seconds, the die, restarting the watcher.
+            sleep( 10 );
         }
     }
 }
